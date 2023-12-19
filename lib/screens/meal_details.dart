@@ -3,15 +3,27 @@ import 'package:plate_pilot/models/meal.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class MealsDetails extends StatelessWidget {
-  const MealsDetails({super.key, required this.meal});
+  const MealsDetails({super.key, required this.meal, required this.onToggleFavoutiteMeal});
 
   final Meal meal;
+  final void Function(Meal meal) onToggleFavoutiteMeal;
 
   @override
   Widget build(BuildContext context) {
+    bool isFavoutite = false;
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
+        actions: [
+          IconButton(
+            onPressed: () {
+              onToggleFavoutiteMeal(meal);
+            },
+            icon: isFavoutite == true
+                ? const Icon(Icons.star, size: 30)
+                : const Icon(Icons.star_border, size: 30),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
