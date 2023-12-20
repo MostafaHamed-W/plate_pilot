@@ -6,12 +6,14 @@ import 'package:plate_pilot/screens/meals.dart';
 import 'package:plate_pilot/widgets/category_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key, required this.onToggleFavoutiteMeal});
+  const CategoriesScreen(
+      {super.key, required this.onToggleFavoutiteMeal, required this.availableMeals});
   final void Function(Meal meal) onToggleFavoutiteMeal;
+  final List<Meal> availableMeals;
 
   void _selectCategory(BuildContext context, {required Category category}) {
     final filteredMeals =
-        dummyMeals.where((meal) => meal.categories.contains(category.id)).toList();
+        availableMeals.where((meal) => meal.categories.contains(category.id)).toList();
 
     Navigator.push(
       context,
